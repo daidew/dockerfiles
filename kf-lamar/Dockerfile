@@ -58,12 +58,13 @@ RUN git clone --recursive https://github.com/cvg/Hierarchical-Localization/ && \
     cd Hierarchical-Localization/ && \
     python3 -m pip install -e .
 
-# our lamar-benchmark (for PGO) requires pycolmap==0.6.0 but hloc (at the current date) now requires >=3.12.3 (need to force it)
-# I think usually PGO and hloc are in a separate container, so this is fine, but we need to overwrite it to make it work in a single container.
-RUN python3 -m pip install pycolmap==0.6.0
-
 RUN python3 -m pip install --upgrade pip && \
     python3 -m pip install --upgrade pyproject jupyter jupyterlab h5py tqdm matplotlib ipywidgets kfp
+
+# our lamar-benchmark (for PGO) requires pycolmap==0.6.0 but hloc (at the current date) now requires >=3.12.3 (need to force it)
+# I think usually PGO and hloc are in a separate container, so this is fine, but we need to overwrite it to make it work in a single container.
+# warning: reconstruction-pipeline requires pycolmap<=0.4.0
+RUN python3 -m pip install pycolmap==0.6.0 protobuf==5.27.2
 
 EXPOSE 8888
 ENV NB_PREFIX /
