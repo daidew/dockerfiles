@@ -15,6 +15,8 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     libxext6 \
     git-all \
     ssh \
+    tmux \
+    htop \
     cmake libgoogle-glog-dev libgflags-dev libatlas-base-dev libeigen3-dev \
     libsuitesparse-dev build-essential
 
